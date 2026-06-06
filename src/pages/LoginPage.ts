@@ -1,31 +1,42 @@
-import { Page,Locator } from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
 import { BasePage } from './BasePage';
+
+/**
+ * TTACart login screen.
+ *
+ *   const login = new LoginPage(page);
+ *   await login.open();
+ *   await login.loginAs('standard_user', 'tta_secret');
+ */
+
+
 
 export class LoginPage extends BasePage {
 
     static readonly PATH = '/playwright/ttacart/index.html';
 
-    private readonly userName :Locator;
-    private readonly password :Locator;
-    private readonly loginButton : Locator;
-    private readonly errorMsg: Locator;
-    private readonly securityHint: Locator;
+    private readonly usernameInput: Locator;
+    private readonly passwordInput: Locator;
+    private readonly loginButton: Locator;
 
     constructor(page: Page) {
         super(page, 'LoginPage');
-        this.userName = page.locator('#user-name');
-        this.password = page.locator('#password');
-        this.loginButton = page.locator('#login-button');
-        this.errorMsg = page.locator('[data-test="error"]');
-        this.securityHint = page.locator('.login-hint');
+        this.usernameInput = page.locator('[data-test="username"]');
+        this.passwordInput = page.locator('[data-test="password"]');
+        this.loginButton = page.locator('[data-test="login-button"]');
     }
-     async open(): Promise<void> {
-        await this.goto(LoginPage.PATH);}
 
-     async loginAs(username: string, password: string): Promise<void> {
+    async open(): Promise<void> {
+        await this.goto(LoginPage.PATH);
+    }
+
+    async loginAs(username: string, password: string): Promise<void> {
         this.log.info(`loginAs ${username}`);
-        await this.el.fill(this.userName, username);
-        await this.el.fill(this.password, password);
+        await this.el.fill(this.usernameInput, username);
+        await this.el.fill(this.passwordInput, password);
         await this.el.click(this.loginButton);
     }
+
+
+
 }

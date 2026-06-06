@@ -5,22 +5,16 @@ export class InventoryPage extends BasePage {
     static readonly PATH = '/playwright/ttacart/inventory.html';
 
     private readonly title: Locator;
-    private readonly sortDropdown: Locator;
     private readonly items: Locator;
     private readonly itemNames: Locator;
-    private readonly itemPrices: Locator;
     private readonly cartLink: Locator;
-    private readonly cartBadge: Locator;
 
     constructor(page: Page) {
         super(page, 'InventoryPage');
         this.title = page.locator('[data-test="title"]');
-        this.sortDropdown = page.locator('[data-test="product-sort-container"]');
         this.items = page.locator('[data-test="inventory-item"]');
         this.itemNames = page.locator('[data-test="inventory-item-name"]');
-        this.itemPrices = page.locator('[data-test="inventory-item-price"]');
         this.cartLink = page.locator('[data-test="shopping-cart-link"]');
-        this.cartBadge = page.locator('[data-test="shopping-cart-badge"]');
     }
 
     async open(): Promise<void> {
