@@ -7,3 +7,9 @@ coverage
 .husky
 .vscode
 .idea
+.playwright
+test-results
+playwright-report
+*.log
+.env*
+

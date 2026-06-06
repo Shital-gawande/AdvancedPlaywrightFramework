@@ -75,6 +75,80 @@ Linting automatically runs on every code commit via husky and lint-staged. This 
 - Constants must use UPPER_CASE naming
 - No complex logic, configuration only
 
+## Test Quality Checks
+
+These rules ensure high-quality, maintainable test code in Playwright tests.
+
+### Test Structure & Clarity
+- **Test names must be descriptive**: Clearly indicate what is being tested
+  ```typescript
+  // ❌ Bad
+  test('login test', async ({ page }) => {
+  
+  // ✅ Good
+  test('should successfully log in with valid credentials', async ({ page }) => {
+  ```
+- **Each test should test one thing**: Follow Single Responsibility Principle
+- **Avoid test interdependencies**: Tests must run independently
+- **Use meaningful assertion messages**: Helps with debugging test failures
+
+### Assertion Practices
+- **No empty assertions**: Every assertion must have a clear purpose
+  ```typescript
+  // ❌ Bad
+  expect(response).toBeTruthy();
+  
+  // ✅ Good
+  expect(response.status()).toBe(200);
+  ```
+- **Specific assertions over generic**: Use exact matchers
+- **Assert one logical thing per assertion**: Avoid multiple conditions
+
+### Test Fixtures & Setup
+- **Initialize fixtures properly**: Use `beforeEach` and `afterEach` hooks
+- **Clean up resources**: Ensure all test data is cleaned up after tests
+- **No hardcoded values**: Use test data from `src/testdata/`
+- **Reuse Page Object methods**: Avoid duplicating element selectors
+
+### Error Handling in Tests
+- **No silently caught errors**: Always handle or log errors
+- **Proper timeout management**: Set appropriate timeouts for async operations
+  ```typescript
+  // ❌ Bad
+  await page.waitForSelector('.element');
+  
+  // ✅ Good
+  await page.waitForSelector('.element', { timeout: 5000 });
+  ```
+- **Use try-catch wisely**: Catch only expected errors
+
+### Test Performance
+- **Minimize unnecessary waits**: Use smart waits instead of `page.waitForTimeout()`
+- **Parallel test execution**: Write tests that can run in parallel
+- **Avoid brittle selectors**: Use stable, meaningful selectors
+- **No test data pollution**: Each test should start with a clean state
+
+### Debugging & Logging
+- **Use console for test insights**: Log important test events
+  ```typescript
+  console.log('Navigating to login page');
+  console.warn('Unexpected element not found, retrying...');
+  console.error('Test failed due to network timeout');
+  ```
+- **Leverage Playwright Debug Mode**: Use `--debug` flag for development
+- **Attach screenshots on failure**: Helps troubleshoot flaky tests
+
+### Code Organization in Tests
+- **Group related tests with describe blocks**: Organize by feature/page
+  ```typescript
+  test.describe('Authentication Module', () => {
+    test('should handle valid login', () => { });
+    test('should reject invalid credentials', () => { });
+  });
+  ```
+- **Use meaningful variable names**: Make test intent clear
+- **Follow DRY principle**: Extract common test operations into helpers
+
 ## Prettier Configuration
 
 Code is automatically formatted with Prettier using:

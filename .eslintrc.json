@@ -19,6 +19,14 @@
   "plugins": [
     "@typescript-eslint"
   ],
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "./tsconfig.json"
+      }
+    }
+  },
   "rules": {
     "no-console": [
       "warn",
@@ -118,11 +126,16 @@
   "overrides": [
     {
       "files": [
-        "src/tests/**/*.spec.ts"
+        "src/tests/**/*.spec.ts",
+        "src/tests/**/*.test.ts"
       ],
       "rules": {
         "no-console": "off",
-        "@typescript-eslint/no-explicit-any": "off"
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-empty-function": "off",
+        "@typescript-eslint/no-floating-promises": "warn",
+        "no-unused-expressions": "warn",
+        "@typescript-eslint/no-misused-promises": "warn"
       }
     },
     {
@@ -142,6 +155,15 @@
             ]
           }
         ]
+      }
+    },
+    {
+      "files": [
+        "src/pages/**/*.ts",
+        "src/fixtures/**/*.ts"
+      ],
+      "rules": {
+        "@typescript-eslint/explicit-member-accessibility": "off"
       }
     }
   ]
