@@ -17,7 +17,7 @@ coverage/
 allure-results/
 allure-report/
 test-results/
-tta-reports/
+**/tta-reports/
 
 # Build & Dist
 dist/
