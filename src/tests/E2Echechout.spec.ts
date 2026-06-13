@@ -68,12 +68,14 @@ test.describe('@P0 @Regression E2E @Checkout Checkout Feature', () => {
             log.info('Step 5b: reviewing the overview and finishing the order');
             await checkoutStepTwoPage.assertLoaded();
             await checkoutStepTwoPage.finish();
+            
         });
 
         // Step 5 — order complete
         await visualStep(page, 'Order is complete', async () => {
             log.info('Step 6: asserting the order is complete');
             await checkoutCompletePage.assertOrderComplete();
+            //https://app.thetestingacademy.com/playwright/
         });
     });
 

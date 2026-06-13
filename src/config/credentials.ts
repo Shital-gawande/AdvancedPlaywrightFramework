@@ -11,6 +11,7 @@
  */
 
 export const credentials = {
-    standardUser: process.env.STANDARD_USER ?? '',
-    password: process.env.TTA_SECRET ?? '',
+    // If the environment variable doesn't exist, it falls back to the string literal
+    standardUser: process.env.STANDARD_USER ?? 'standard_user',
+    password: process.env.TTA_SECRET ?? 'tta_secret', // or 'tta_secret' based on your login test
 } as const;
