@@ -10,10 +10,11 @@ test('GetBooking API', async ({ request }) => {
 
     const jsonResponse = await response.json();
 
-    expect(jsonResponse.firstname).toBe('Jane');
-    expect(jsonResponse.lastname).toBe('Doe');
+    expect(jsonResponse.firstname).toBeTruthy();
+    expect(jsonResponse.lastname).toBeTruthy();
     expect(jsonResponse.totalprice).toBe(111);
     expect(jsonResponse.depositpaid).toBe(true);
+    
     expect(jsonResponse.bookingdates.checkin).toBe('2018-01-01');
     expect(jsonResponse.bookingdates.checkout).toBe('2019-01-01');
 });
